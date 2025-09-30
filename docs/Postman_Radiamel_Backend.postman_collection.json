@@ -1,0 +1,103 @@
+{
+  "info": {
+    "name": "Radiamel Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Radiamel backend endpoints with cookie-based JWT auth. Include credentials in FE."
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{base_url}}/health" }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\",\n  \"name\": \"User\"\n}"
+            },
+            "url": "{{base_url}}/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": "{{base_url}}/auth/login"
+          }
+        },
+        {
+          "name": "Me",
+          "request": { "method": "GET", "url": "{{base_url}}/auth/me" }
+        },
+        {
+          "name": "Logout",
+          "request": { "method": "POST", "url": "{{base_url}}/auth/logout" }
+        }
+      ]
+    },
+    {
+      "name": "NDA",
+      "item": [
+        {
+          "name": "Accept NDA",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "body": { "mode": "raw", "raw": "{\n  \"accepted\": true\n}" },
+            "url": "{{base_url}}/nda/accept"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Investor",
+      "item": [
+        {
+          "name": "Positioning",
+          "request": { "method": "GET", "url": "{{base_url}}/investor/positioning" }
+        },
+        {
+          "name": "Signed URL",
+          "request": { "method": "GET", "url": "{{base_url}}/investor/signed-url" }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/admin/users?limit=20",
+              "host": [ "{{base_url}}" ],
+              "path": [ "admin", "users" ],
+              "query": [ { "key": "limit", "value": "20" } ]
+            }
+          }
+        },
+        {
+          "name": "Export Users CSV",
+          "request": { "method": "GET", "url": "{{base_url}}/admin/export/users.csv" }
+        }
+      ]
+    }
+  ]
+}
+
+
